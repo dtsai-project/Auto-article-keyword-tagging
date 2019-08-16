@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<br>
+{% for form, idx, tag  in forms|zip(num, tags)  %}
+<div class="content-section">
+    <div class="col-md-12">
+        <legend class="border-bottom mb-4">{{ form.title }} </legend>
+        <div>
+            <strong> keyword tags : </strong> &ensp;
+            {% for i in tag %}
+            {% set out = i.translate({ord("'"): None}) %}
+            <a href="#" class="badge badge-info">{{ out.translate({ord(","): None}) }}</a>
+
+            <!-- <span class="badge badge-light">9</span> -->
+            {% endfor %}
+
+        </div>
+        <br>
+        <div>
+            {{ form.content }}
+        </div>
+        <br>
+        <div>
+            <a href="{{ url_for('delete_post', id=form.id) }}" class="btn btn-outline-danger">Hapus</a>
+        </div>
+
+
+
+    </div>
+</div>
+{% endfor %}
+
+
+{% endblock %}
